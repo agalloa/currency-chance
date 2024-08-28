@@ -1,11 +1,10 @@
-
 import { Route, Routes } from 'react-router-dom'
-import { ConversionForm } from '../components'
+import { Tabs } from '../components/ui/Tabs/Tabs'
 
 export const RouterConfig  = () => {
   return (
     <Routes>
-      <Route path="/*" element={<ConversionForm />} />
+      <Route path="/*" element={<Tabs />} />
     </Routes>
   )
 }

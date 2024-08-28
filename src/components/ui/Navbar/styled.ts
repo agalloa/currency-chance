@@ -46,8 +46,8 @@ export const Menu = styled.div<IMenuProps>`
   @media (max-width: 768px) {
     flex-direction: column;
     position: absolute;
-    top: 70px;
-    left: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+    top: 60px;
+    left: ${({ isOpen }) => (isOpen ? "0" : "-115%")};
     width: 100%;
     background-color: #333;
     transition: left 0.3s ease-in-out;
@@ -60,7 +60,7 @@ export const MenuItem = styled(Link)`
   text-decoration: none;
   color: white;
   font-size: 1.2rem;
-
+  padding: 0rem 1rem;
   &:hover {
     color: #aaa;
   }
@@ -73,8 +73,12 @@ export const RegisterButton = styled(Link)`
   padding: 0.5rem 1rem;
   border-radius: 5px;
   text-decoration: none;
-
+   
   &:hover {
     background-color: #45a049;
+  }
+    @media (max-width: 768px) {
+     width: 85%;
+    margin: 0px auto;
   }
 `;
