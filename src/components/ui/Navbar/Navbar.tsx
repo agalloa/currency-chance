@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import { useState } from 'react';
 import { Hamburger, Logo, Menu, MenuItem, Nav, RegisterButton } from './styled';
 
