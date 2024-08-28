@@ -1,13 +1,23 @@
-import { useEffect, useState } from 'react';
-import { getRatesCurrencies } from '../../../services/getRatesCurrencies';
-import { CurrencyOption, CurrencySelectorProps } from '../../../interfaces';
-import Select from 'react-select';
+import { useEffect, useState } from "react";
+import { getRatesCurrencies } from "../../../services/getRatesCurrencies";
+import { CurrencyOption, CurrencySelectorProps } from "../../../interfaces";
+import Select from "react-select";
+import {
+  CurrencySelectorContainer,
+  ExchangeRateContainer,
+  TitleAmount,
+} from "./styled";
 
-export const CurrencySelector = ({ onBaseCurrencyChange, onTargetCurrencyChange }: CurrencySelectorProps) => {
-    const [rates, setRates] = useState<{ [key: string]: number } | null>(null);
-  const [baseCurrency, setBaseCurrency] = useState<string>('COP');
-  const [selectedBaseCurrency, setSelectedBaseCurrency] = useState<CurrencyOption | null>(null);
-  const [selectedTargetCurrency, setSelectedTargetCurrency] = useState<CurrencyOption | null>(null);
+export const CurrencySelector = ({
+  onBaseCurrencyChange,
+  onTargetCurrencyChange,
+}: CurrencySelectorProps) => {
+  const [rates, setRates] = useState<{ [key: string]: number } | null>(null);
+  const [baseCurrency, setBaseCurrency] = useState<string>("COP");
+  const [selectedBaseCurrency, setSelectedBaseCurrency] =
+    useState<CurrencyOption | null>(null);
+  const [selectedTargetCurrency, setSelectedTargetCurrency] =
+    useState<CurrencyOption | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +28,7 @@ export const CurrencySelector = ({ onBaseCurrencyChange, onTargetCurrencyChange 
         if (data.conversion_rates) {
           setSelectedBaseCurrency({
             value: baseCurrency,
-            label: baseCurrency
+            label: baseCurrency,
           });
         }
       } catch (err) {
@@ -36,40 +46,47 @@ export const CurrencySelector = ({ onBaseCurrencyChange, onTargetCurrencyChange 
     }
   };
 
-  const handleTargetCurrencyChange = (selectedOption: CurrencyOption | null) => {
+  const handleTargetCurrencyChange = (
+    selectedOption: CurrencyOption | null
+  ) => {
     setSelectedTargetCurrency(selectedOption);
     if (selectedOption) {
       onTargetCurrencyChange(selectedOption.value);
     }
   };
-  const currencyOptions = rates ? Object.keys(rates).map(currency => ({
-    value: currency,
-    label: currency
-  })) : [];
+  const currencyOptions = rates
+    ? Object.keys(rates).map((currency) => ({
+        value: currency,
+        label: currency,
+      }))
+    : [];
 
-    return (
-        <div>
-      <h1>Exchange Rates</h1>
+  return (
+    <div>
       {rates && (
-        <div>
-          <label>Base Currency:</label>
-          <Select
-            value={selectedBaseCurrency}
-            onChange={handleBaseCurrencyChange}
-            options={currencyOptions}
-            isSearchable
-            placeholder="Select base currency"
-          />
-          <label>Target Currency:</label>
-          <Select
-            value={selectedTargetCurrency}
-            onChange={handleTargetCurrencyChange}
-            options={currencyOptions}
-            isSearchable
-            placeholder="Select target currency"
-          />
-        </div>
+        <CurrencySelectorContainer>
+          <ExchangeRateContainer>
+            <TitleAmount>Convertir De:</TitleAmount>
+            <Select
+              value={selectedBaseCurrency}
+              onChange={handleBaseCurrencyChange}
+              options={currencyOptions}
+              isSearchable
+              placeholder="Busca la base...."
+            />
+          </ExchangeRateContainer>
+          <ExchangeRateContainer>
+            <TitleAmount>Convertir A:</TitleAmount>
+            <Select
+              value={selectedTargetCurrency}
+              onChange={handleTargetCurrencyChange}
+              options={currencyOptions}
+              isSearchable
+              placeholder="Busca la moneda de destino...."
+            />
+          </ExchangeRateContainer>
+        </CurrencySelectorContainer>
       )}
     </div>
-    );
-}
+  );
+};

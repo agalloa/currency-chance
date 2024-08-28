@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { clearHistory } from "../../redux/historySlice";
+import {
+  CardHistory,
+  CardHistoryContent,
+  ContainerHistorialButton,
+  HistorialButton,
+  TitleHistory,
+} from "./styled";
 
 export const History = () => {
   const history = useSelector((state: RootState) => state.history.history);
@@ -12,20 +19,29 @@ export const History = () => {
 
   return (
     <div>
-      <h2>Conversion History</h2>
+      <TitleHistory>Historial de Conversión</TitleHistory>
       {history.length === 0 ? (
         <p>No conversions yet.</p>
       ) : (
-        <ul>
+        <CardHistory>
           {history.map((entry, index) => (
-            <li key={index}>
-              {entry.amount} {entry.baseCurrency} to {entry.targetCurrency} ={" "}
-              {entry.result}
-            </li>
+            <CardHistoryContent>
+              <div>
+                La conversión de: {entry.amount}
+                {entry.baseCurrency}
+              </div>
+              <div>
+                equivale a: {entry.result} {entry.targetCurrency}
+              </div>
+            </CardHistoryContent>
           ))}
-        </ul>
+        </CardHistory>
       )}
-      <button onClick={handleClearHistory}>Clear History</button>
+      <ContainerHistorialButton>
+        <HistorialButton onClick={handleClearHistory}>
+          Limpiar Historial
+        </HistorialButton>
+      </ContainerHistorialButton>
     </div>
   );
 };

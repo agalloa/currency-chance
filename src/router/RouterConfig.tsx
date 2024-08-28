@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
-import { Tabs } from '../components/ui/Tabs/Tabs'
+import { Card } from '../components/ui/Card/Card'
 
 export const RouterConfig  = () => {
   return (
     <Routes>
-      <Route path="/*" element={<Tabs />} />
+      <Route path="/*" element={<Card />} />
     </Routes>
   )
 }
