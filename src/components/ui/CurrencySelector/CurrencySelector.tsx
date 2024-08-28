@@ -43,6 +43,7 @@ export const CurrencySelector = ({
     setSelectedBaseCurrency(selectedOption);
     if (selectedOption) {
       onBaseCurrencyChange(selectedOption.value);
+      setSelectedTargetCurrency(null);
     }
   };
 
@@ -54,12 +55,17 @@ export const CurrencySelector = ({
       onTargetCurrencyChange(selectedOption.value);
     }
   };
+
   const currencyOptions = rates
     ? Object.keys(rates).map((currency) => ({
         value: currency,
         label: currency,
       }))
     : [];
+
+  const filteredCurrencyOptions = currencyOptions.filter(
+    (option) => option.value !== selectedBaseCurrency?.value
+  );
 
   return (
     <div>
@@ -72,7 +78,7 @@ export const CurrencySelector = ({
               onChange={handleBaseCurrencyChange}
               options={currencyOptions}
               isSearchable
-              placeholder="seleccionar moneda...."
+              placeholder="Seleccionar moneda..."
             />
           </ExchangeRateContainer>
           <ExchangeRateContainer>
@@ -80,9 +86,9 @@ export const CurrencySelector = ({
             <Select
               value={selectedTargetCurrency}
               onChange={handleTargetCurrencyChange}
-              options={currencyOptions}
+              options={filteredCurrencyOptions}
               isSearchable
-              placeholder="seleccionar moneda...."
+              placeholder="Seleccionar moneda..."
             />
           </ExchangeRateContainer>
         </CurrencySelectorContainer>
