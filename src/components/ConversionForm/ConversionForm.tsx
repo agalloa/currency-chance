@@ -17,6 +17,8 @@ import {
   TitleAmount,
   TitleResult,
 } from "./styled";
+import { formatCurrency } from "../../utils/formatCurrency";
+
 
 export const ConversionForm = () => {
   const [amount, setAmount] = useState<number | "">("");
@@ -105,7 +107,9 @@ export const ConversionForm = () => {
         {conversionResult !== null && (
           <>
             <TitleResult>El resultado de la conversión es:</TitleResult>
-            <ResultContainer>{conversionResult}</ResultContainer>
+            <ResultContainer>
+              {formatCurrency(conversionResult, targetCurrency)}
+            </ResultContainer>
           </>
         )}
       </ContainerResult>

@@ -8,6 +8,7 @@ import {
   HistorialButton,
   TitleHistory,
 } from "./styled";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 export const History = () => {
   const history = useSelector((state: RootState) => state.history.history);
@@ -25,13 +26,12 @@ export const History = () => {
       ) : (
         <CardHistory>
           {history.map((entry, index) => (
-            <CardHistoryContent>
+            <CardHistoryContent key={index}>
               <div>
-                La conversión de: {entry.amount}
-                {entry.baseCurrency}
+                La conversión de: {formatCurrency(entry.amount, entry.baseCurrency)}
               </div>
               <div>
-                equivale a: {entry.result} {entry.targetCurrency}
+                equivale a: {formatCurrency(entry.result, entry.targetCurrency)}
               </div>
             </CardHistoryContent>
           ))}
