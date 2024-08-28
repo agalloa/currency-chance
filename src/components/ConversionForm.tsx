@@ -1,61 +1,59 @@
-import { useEffect, useState } from "react";
-import { Currency } from "../interfaces";
-import { getAllCurrencies } from "../services/getAllCurrencies";
-import Select from 'react-select';
-
-
-export interface ConversionFormProps {
-  onConversion: (conversion: Conversion) => void;
-}
-
-export interface Conversion {
-  amount: number;
-  fromCurrency: string;
-  toCurrency: string;
-  result: number;
-}
+import { useState } from 'react';
+import { CurrencySelector } from './ui/CurrencySelector/CurrencySelector';
+import { convertCurrency } from '../services/convertCurrency';
 
 export const ConversionForm = () => {
-  const [allCurrencies, setAllCurrencies] = useState<Currency[]>([]);
+  const [amount, setAmount] = useState<number | ''>('');
+  const [baseCurrency, setBaseCurrency] = useState<string>('COP');
+  const [targetCurrency, setTargetCurrency] = useState<string>('');
+  const [conversionResult, setConversionResult] = useState<number | null>(null);
 
-
-  useEffect(() => {
-    getAllCurrencies().then(data => {
-      const currencyOptions = data.currencies.map((currency: Currency) => ({
-        value: currency.iso,
-        label: `${currency.iso} - ${currency.currency_name}`
-      }));
-      setAllCurrencies(currencyOptions);
-    });
-  }, []);
-
-  const handleConversion = () => {
-    console.log("Conversion");
+  const handleBaseCurrencyChange = (value: string) => {
+    setBaseCurrency(value);
   };
 
+  const handleTargetCurrencyChange = (value: string) => {
+    setTargetCurrency(value);
+  };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAmount(value === '' ? '' : Number(value));
+  };
   
+  const handleConversion = async () => {
+    if (amount !== '' && baseCurrency && targetCurrency) {
+      try {
+        const data = await convertCurrency(baseCurrency, targetCurrency, amount);
+        console.log(data.conversion_result);
+        setConversionResult(data.conversion_result);
+      } catch (error) {
+        console.error("Error during conversion:", error);
+      }
+    } else {
+      console.warn("Please provide amount, base currency, and target currency.");
+    }
+  };
 
   return (
     <div>
-      <input
-        type="number"
-        value="value"
-        onChange={(e) => console.log(e.target.value)}
-        placeholder="Cantidad"
+      <div className="input-amount">
+        <label>Amount:</label>
+        <input 
+          type='number'
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
+          placeholder='Amount'
+        />
+      </div>
+      <CurrencySelector 
+        onBaseCurrencyChange={handleBaseCurrencyChange} 
+        onTargetCurrencyChange={handleTargetCurrencyChange} 
       />
-      <Select
-        options={allCurrencies}
-        onChange={handleConversion}
-        isSearchable
-        placeholder="Escribe la moneda a convertir..."
-      />
-      <Select
-        options={allCurrencies}
-        onChange={handleConversion}
-        isSearchable
-        placeholder="Escribe la moneda de destino..."
-      />
-      <button onClick={handleConversion}>Convertir</button>
+      <button onClick={handleConversion}>Convert</button>
+      {conversionResult !== null && (
+        <p>Conversion Result: {conversionResult}</p>
+      )}
     </div>
   );
 };
