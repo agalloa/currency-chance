@@ -4,7 +4,7 @@ export const LoaderScreen = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;

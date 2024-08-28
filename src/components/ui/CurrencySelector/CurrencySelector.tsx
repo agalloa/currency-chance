@@ -72,7 +72,7 @@ export const CurrencySelector = ({
               onChange={handleBaseCurrencyChange}
               options={currencyOptions}
               isSearchable
-              placeholder="Busca la base...."
+              placeholder="seleccionar moneda...."
             />
           </ExchangeRateContainer>
           <ExchangeRateContainer>
@@ -82,7 +82,7 @@ export const CurrencySelector = ({
               onChange={handleTargetCurrencyChange}
               options={currencyOptions}
               isSearchable
-              placeholder="Busca la moneda de destino...."
+              placeholder="seleccionar moneda...."
             />
           </ExchangeRateContainer>
         </CurrencySelectorContainer>

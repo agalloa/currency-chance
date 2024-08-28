@@ -20,13 +20,13 @@ export const CardHistory = styled.div`
 
 
 export const CardHistoryContent = styled.div`
-    background-color: #33383d;
+    background-color: #fff;
     border: 2px solid #cff500;
     border-radius: 10px;
     padding: 10px;
     width: auto;
     margin: 5px 10px;
-    color: white;
+    color: #000;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     &:hover {
         transform: translateY(-4px);
