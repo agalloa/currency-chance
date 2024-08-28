@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Content, TabButton, ContainerTabs } from "./styled";
-import { ConversionForm } from "../../ConversionForm";
+import { ConversionForm } from "../../ConversionForm/ConversionForm";
 
 export interface ITabButtonProps {
     active: boolean;

@@ -15,7 +15,6 @@ export const CurrencySelector = ({ onBaseCurrencyChange, onTargetCurrencyChange 
         const data = await getRatesCurrencies();
         setRates(data.conversion_rates);
 
-        // Establecer el valor inicial para la moneda base
         if (data.conversion_rates) {
           setSelectedBaseCurrency({
             value: baseCurrency,

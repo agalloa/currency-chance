@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import { CurrencySelector } from './ui/CurrencySelector/CurrencySelector';
-import { convertCurrency } from '../services/convertCurrency';
+import { CurrencySelector } from '../ui/CurrencySelector/CurrencySelector';
+import { convertCurrency } from '../../services/convertCurrency';
+import { useDispatch, useSelector } from 'react-redux';
+import { addConversion } from '../../redux/historySlice';
+import { AppDispatch, RootState } from '../../redux/store';
+import { History } from '../History/History';
 
 export const ConversionForm = () => {
   const [amount, setAmount] = useState<number | ''>('');
   const [baseCurrency, setBaseCurrency] = useState<string>('COP');
   const [targetCurrency, setTargetCurrency] = useState<string>('');
   const [conversionResult, setConversionResult] = useState<number | null>(null);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const history = useSelector((state: RootState) => state.history.history);
 
   const handleBaseCurrencyChange = (value: string) => {
     setBaseCurrency(value);
@@ -20,13 +28,13 @@ export const ConversionForm = () => {
     const value = e.target.value;
     setAmount(value === '' ? '' : Number(value));
   };
-  
+
   const handleConversion = async () => {
     if (amount !== '' && baseCurrency && targetCurrency) {
       try {
         const data = await convertCurrency(baseCurrency, targetCurrency, amount);
-        console.log(data.conversion_result);
         setConversionResult(data.conversion_result);
+        dispatch(addConversion({ baseCurrency, targetCurrency, amount, result: data.conversion_result }));
       } catch (error) {
         console.error("Error during conversion:", error);
       }
@@ -42,7 +50,7 @@ export const ConversionForm = () => {
         <input 
           type='number'
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          onChange={handleAmountChange}
           placeholder='Amount'
         />
       </div>
@@ -54,6 +62,7 @@ export const ConversionForm = () => {
       {conversionResult !== null && (
         <p>Conversion Result: {conversionResult}</p>
       )}
+      {history.length > 0 && <History />}
     </div>
   );
 };
