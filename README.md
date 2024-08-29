@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# Currency Converter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Currency Converter is a web application that allows users to convert amounts between different currencies using live exchange rates. The application provides a user-friendly interface where users can input the amount to be converted, select base and target currencies, and view the conversion result. It also maintains a history of conversions and provides an option to clear the history.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Convert between different currencies with real-time exchange rates.
+- Maintain a history of conversions.
+- Swap base and target currencies with a single click.
+- Responsive design with a visually appealing interface.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To get started with the application, follow these steps:
 
-### `npm test`
+1. **Clone the Repository**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://github.com/agalloa/currency-chance.git
 
-### `npm run build`
+2. **Navigate to the Project Directory**
+- cd currency-converter
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Install Dependencies**
+- npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Setup Environment Variables**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a .env file in the root of the project and add your environment variables. For example:
 
-### `npm run eject`
+- REACT_APP_EXCHANGERATE_API_URL=https://v6.exchangerate-api.com/v6
+- REACT_APP_EXCHANGERATE_API_KEY=YOUR_API_KEY
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Replace your-api-url and your-api-key with the actual values provided by your currency exchange rate API.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Start the Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- npm start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+6. **Open the Application in Your Browser**
 
-## Learn More
+- http://localhost:3000/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Packages Used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React: A JavaScript library for building user interfaces.
+- React Redux: A library for managing state in React applications.
+- React Router DOM: A library for routing in React applications.
+- Styled Components: A library for writing CSS in JavaScript.
+- React Select: A flexible and customizable select input control for React.
+- Axios: A promise-based HTTP client for making requests.
+- React Loader Spinner: A library for displaying loading spinners.
+- SweetAlert2: A library for beautiful, responsive, customizable alerts.
+- Dotenv: A library for loading environment variables from a .env file.
+- TypeScript: A typed superset of JavaScript that compiles to plain JavaScript
+
+## Images:
+![Captura de Pantalla](./images/01.png)
+![Captura de Pantalla](./images/02.png)
+![Captura de Pantalla](./images/03.png)
+![Captura de Pantalla](./images/04.png)
+![Captura de Pantalla](./images/05.png)
+![Captura de Pantalla](./images/06.png)
