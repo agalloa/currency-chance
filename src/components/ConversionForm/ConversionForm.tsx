@@ -40,7 +40,15 @@ export const ConversionForm = () => {
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setAmount(value === "" ? "" : Number(value));
+    if (value === "" || (Number(value) > 0)) {
+      setAmount(value === "" ? "" : Number(value));
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Valor inválido",
+        text: "Por favor ingrese un número mayor que cero.",
+      });
+    }
   };
 
   const handleConversion = async () => {
