@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { CurrencySelector } from "../ui/CurrencySelector/CurrencySelector";
 import { convertCurrency } from "../../services/convertCurrency";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { History } from "../History/History";
 import Swal from "sweetalert2";
 import { FullScreenLoader } from "../ui/FullScreenLoader/FullScreenLoader";
+import { SwapButton } from "../ui/SwapButton/SwapButton";
+import { formatCurrency } from "../../utils/formatCurrency";
 import {
   AmountContainer,
   ContainerResult,
@@ -17,8 +19,6 @@ import {
   TitleAmount,
   TitleResult,
 } from "./styled";
-import { formatCurrency } from "../../utils/formatCurrency";
-
 
 export const ConversionForm = () => {
   const [amount, setAmount] = useState<number | "">("");
@@ -76,6 +76,14 @@ export const ConversionForm = () => {
     }
   };
 
+  const handleSwap = () => {
+    setBaseCurrency((prev) => {
+      const newTarget = targetCurrency;
+      setTargetCurrency(prev);
+      return newTarget;
+    });
+  };
+
   const isConvertButtonDisabled =
     amount === "" || !baseCurrency || !targetCurrency;
 
@@ -92,10 +100,14 @@ export const ConversionForm = () => {
             placeholder="Cantidad"
           />
         </AmountContainer>
+       
         <CurrencySelector
+          baseCurrency={baseCurrency}
+          targetCurrency={targetCurrency}
           onBaseCurrencyChange={handleBaseCurrencyChange}
           onTargetCurrencyChange={handleTargetCurrencyChange}
         />
+        <SwapButton onSwap={handleSwap} />
         <ConversionButton
           onClick={handleConversion}
           disabled={isConvertButtonDisabled}

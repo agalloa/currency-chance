@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { clearHistory } from "../../redux/historySlice";
+import { formatCurrency } from "../../utils/formatCurrency";
 import {
   CardHistory,
   CardHistoryContent,
@@ -8,7 +9,6 @@ import {
   HistorialButton,
   TitleHistory,
 } from "./styled";
-import { formatCurrency } from "../../utils/formatCurrency";
 
 export const History = () => {
   const history = useSelector((state: RootState) => state.history.history);

@@ -7,6 +7,7 @@ export const CurrencySelectorContainer = styled.div`
     @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
+         width: 90%;
     }
 `
 
@@ -16,7 +17,7 @@ export const ExchangeRateContainer = styled.div`
     width: 300px;
     margin: 0px 40px;
     @media (max-width: 768px) {
-         width: 90%;
+         width: 100%;
     }
 
 `
